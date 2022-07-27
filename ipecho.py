@@ -29,10 +29,11 @@ def send_email(to, params):
         try:
             server = smtplib.SMTP(dotenv_values()['SMTP_SERVER'], dotenv_values()['SMTP_PORT'])
             server.login(dotenv_values()['SMTP_USER'], dotenv_values()['SMTP_PASSWORD'])
+            subject = 'IP Changed for ' + dotenv_values()['HOSTNAME']
             msg = f'''
             From: {dotenv_values()['SMTP_USER']}
             To: {to}
-            Subject: IP Change for {dotenv_values()['HOSTNAME']}
+            Subject: {subject}
             {params}'''
             server.sendmail(dotenv_values()['SMTP_USER'], to, msg)
             server.quit()
